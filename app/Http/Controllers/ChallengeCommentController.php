@@ -14,7 +14,9 @@ class ChallengeCommentController extends Controller
      */
     public function index()
     {
-        //
+        $data['challenges'] = challengeComment::orderBy('createDate','desc')->paginate(10);
+   
+        return view('comment.List',$data);
     }
 
     /**

@@ -15,18 +15,19 @@
         <table class="table table-bordered" id="laravel_crud">
          <thead>
             <tr>
-               <th>Id</th>
-               <th> Name</th>
-               <th>Email</th>
-               <th>Password</th>
-               <th>Type</th>
+               <th class="text-center">Id</th>
+               <th class="text-center"> Name</th>
+               <th class="text-center">Email</th>
+               <th class="text-center"> Password</th>
+               <th class="text-center">Type</th>
             
                <th colspan="2" class="text-center">Action</th>
             </tr>
          </thead>
          <tbody>
             @foreach($users as $user)
-            <tr>
+            @if( $user->type==$participantType ||$user->type==$guestype )
+            <tr class="text-center">
                <td>{{ $user->id }}</td>
                <td>{{ $user->name }}</td>
                <td>{{ $user->email }}</td>
@@ -44,6 +45,7 @@
               </form>
               </td>
             </tr>
+            @endif
             @endforeach
  
             @if(count($users) < 1)

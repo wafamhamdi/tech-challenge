@@ -3,15 +3,15 @@
 @section('content')
 <div class="row">
     <div class="col-sm-6">
-        <h4>Add organizer</h4>
+        <h4>Add User</h4>
     </div>
     <div class="col-sm-6 text-right">
-        <a href="{{ route('organizers.index') }}" class="btn btn-danger mb-2">Go Back</a> 
+        <a href="{{ route('users.index') }}" class="btn btn-danger mb-2">Go Back</a> 
     </div>    
 </div>
 <hr />
  
-<form action="{{ route('organizers.store') }}" method="POST" name="organizer">
+<form action="{{ route('users.store') }}" method="POST" name="user">
     {{ csrf_field() }}
       
     <div class="row">
@@ -38,7 +38,7 @@
         </div>
         <div class="col-md-12">
             <button type="submit" class="btn btn-primary">Submit</button>
-            <a href="{{ route('organizers.index') }}" class="btn btn-danger">Cancel</a> 
+            <a href="{{ route('users.index') }}" class="btn btn-danger">Cancel</a> 
         </div>
     </div>     
 </form>

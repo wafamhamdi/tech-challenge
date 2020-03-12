@@ -3,10 +3,10 @@
 @section('content')
  <div class="row">
   <div class="col-sm-6">
-    <h4>organizer List</h4>
+    <h4>User List</h4>
   </div>
   <div class="col-sm-6 text-right">
-    <a href="{{ route('organizers.create') }}" class="btn btn-success mb-2">Add</a> 
+    <a href="{{ route('users.create') }}" class="btn btn-success mb-2">Add</a> 
   </div>
 </div>
  
@@ -15,46 +15,48 @@
         <table class="table table-bordered" id="laravel_crud">
          <thead>
             <tr>
-               <th>Id</th>
-               <th> Name</th>
-               <th>Email</th>
-               <th>Password</th>
-            
+               <th class="text-center">Id</th>
+               <th class="text-center"> Name</th>
+               <th class="text-center">Email</th>
+               <th class="text-center">Password</th>
+               <th class="text-center">Type</th>
             
                <th colspan="2" class="text-center">Action</th>
             </tr>
          </thead>
          <tbody>
-            @foreach($organizers as $organizer)
-            <tr>
-               <td>{{ $organizer->id }}</td>
-               <td>{{ $organizer->name }}</td>
-               <td>{{ $organizer->email }}</td>
-               <td>{{ $organizer->password }}</td>
-              
+            @foreach($users as $user)
+            @if( $user->type==$organizerType)
+            <tr class="text-center">
+               <td>$organizerType {{ $user->id }}</td>
+               <td>{{ $user->name }}</td>
+               <td>{{ $user->email }}</td>
+               <td>{{ $user->password }}</td>
+               <td>{{ $user->type }}</td>
             
              
                <td class="text-center">
-                <a href="{{ route('organizers.edit',$organizer->id)}}" class="btn btn-primary">Edit</a></td>
+                <a href="{{ route('users.edit',$user->id)}}" class="btn btn-primary">Edit</a></td>
                <td class="text-center">
-               <form action="{{ route('organizers.destroy', $organizer->id)}}" method="post">
+               <form action="{{ route('users.destroy', $user->id)}}" method="post">
                 {{ csrf_field() }}
                 @method('DELETE')
                 <button class="btn btn-danger" type="submit">Delete</button>
               </form>
               </td>
             </tr>
+            @endif
             @endforeach
  
-            @if(count($organizers) < 1)
-              <tr>
-               <td colspan="10" class="text-center">There are no organizer available yet!</td>
+            @if(count($users) < 1)
+              <tr class="text-center">
+               <td colspan="10" class="text-center">There are no user available yet!</td>
               </td>
             </tr>
             @endif
          </tbody>
         </table>
-        {!! $organizers->links() !!}
+        {!! $users->links() !!}
      </div> 
  </div>
  @endsection  

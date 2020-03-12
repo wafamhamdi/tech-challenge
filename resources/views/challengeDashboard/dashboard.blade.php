@@ -48,19 +48,19 @@ $("#chartContainer").CanvasJSChart(options);
          <thead>
             <tr>
               
-               <th>Title</th>
-               <th>Description</th>
-               <th>Status</th>
-               <th>Participant List</th>
-               <th>Winner</th>
-               <th>Winner Code</th>
-               <th>Comments List</th>
+               <th class="text-center">Title</th>
+               <th class="text-center">Description</th>
+               <th class="text-center">Status</th>
+               <th class="text-center">Participant List</th>
+               <th class="text-center">Winner</th>
+               <th class="text-center">Winner Code</th>
+               <th class="text-center">Comments List</th>
                
             </tr>
          </thead>
          <tbody>
             @foreach($challenges as $challenge)
-            <tr>
+            <tr class="text-center">
                
                <td>{{ $challenge->title }}</td>
                <td>{{ $challenge->description }}</td>
@@ -75,7 +75,8 @@ $("#chartContainer").CanvasJSChart(options);
                <td class="text-center">
                 <a href="" >Participant Listit</a></td>
                <td></td>
-               <td></td>
+               <td class="text-center">
+                <a href="" >winner code Git Link</a></td>
 
                <td class="text-center">
              

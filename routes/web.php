@@ -12,10 +12,18 @@
 */
 
 Route::get('/', function () {
-    return view('home.home');
+    return view('welcome');
 });
 Route::resource('challenges', 'ChallengeController'); 
 Route::resource('users', 'UserController'); 
 Route::resource('organizers', 'OrganizerController'); 
 
 Route::resource('dashboard', 'ChallengeDashboardController'); 
+Route::resource('comment', 'ChallengeCodeController'); 
+Auth::routes();
+
+//Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/home', function () {
+    return view('home.home');
+});

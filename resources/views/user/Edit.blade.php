@@ -43,12 +43,12 @@
       <div class="col-md-12">
             <div class="form-group">
                 <strong>Type</strong>
-                <select class="form-control" col="4" name="type">
-  
-    <option value="particpant">Particpant</option>
-    <option value="guest">Guest</option>
-    <option value="admin">Admin</option>
-    <option value="organizer">Organizer</option>
+                <select class="form-control" col="4" name="type" value="{{ $user_info->type }}">
+                <option value="{{ $user_info->type }}">{{ $user_info->type }}</option>
+               <option value="participant">participant</option>
+               <option value="guest">Guest</option>
+               <option value="admin">Admin</option>
+                <option value="organizer">Organizer</option>
 </select>
                
                 <span class="text-danger">{{ $errors->first('type') }}</span>

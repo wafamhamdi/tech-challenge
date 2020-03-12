@@ -1,22 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Organizer;
-use Illuminate\Http\Request;
-
 use Redirect;
-
+use Illuminate\Http\Request;
+use App\User;
 class OrganizerController extends Controller
 {
-      /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $data['organizers'] = Organizer::orderBy('id','asc')->paginate(10);
+        $data['users'] = User::orderBy('id','desc')->paginate(10);
    
         return view('organizer.List',$data);
     }
@@ -28,7 +25,7 @@ class OrganizerController extends Controller
      */
     public function create()
     {
-        return view('organizer.Create');
+        return view('user.Create');
     }
 
     /**
@@ -42,13 +39,14 @@ class OrganizerController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            'type' => 'guest'
         ]);
    
-        Organizer::create($request->all());
+        User::create($request->all());
     
-        return Redirect::to('organizers')
-       ->with('success','Greate! Organizer created successfully.');
+        return Redirect::to('users')
+       ->with('success','Greate! User created successfully.');
     }
 
     /**
@@ -71,9 +69,9 @@ class OrganizerController extends Controller
     public function edit($id)
     {
         $where = array('id' => $id);
-        $data['organizer_info'] = Organizer::where($where)->first();
+        $data['user_info'] = User::where($where)->first();
  
-        return view('organizer.Edit', $data);
+        return view('user.Edit', $data);
     }
 
     /**
@@ -89,14 +87,14 @@ class OrganizerController extends Controller
             'name' => 'required',
             'email' => 'required',
             'password' => 'required',
-           
+            'type' => 'required'
         ]);
          
-        $update = ['name' => $request->name, 'email' => $request->email, 'password' => $request->password];
-        Organizer::where('id',$id)->update($update);
+        $update = ['name' => $request->name, 'email' => $request->email, 'password' => $request->password, 'type' => $request->type];
+        User::where('id',$id)->update($update);
    
-        return Redirect::to('organizers')
-       ->with('success','Great! Organizer updated successfully');
+        return Redirect::to('users')
+       ->with('success','Great! User updated successfully');
     }
 
     /**
@@ -106,8 +104,8 @@ class OrganizerController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    { Organizer::where('id',$id)->delete();
+    { User::where('id',$id)->delete();
    
-        return Redirect::to('organizers')->with('success','Organizer deleted successfully');
+        return Redirect::to('users')->with('success','User deleted successfully');
     }
 }

@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Carbon\Carbon;
+use App\User;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -20,8 +22,19 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $current = Carbon::now();
-        
+       
+    
         View::share('current',$current);
+        $organizerType= 'organizer'; 
+        
+        View::share('organizerType',$organizerType);
+        $guestype= 'guest'; 
+        View::share('guestype',$guestype);
+        $participantType= 'participant'; 
+        View::share('participantType',$participantType);
+        $adminType= 'admin'; 
+        View::share('adminType',$adminType);
+       
     } 
 
   

@@ -1,4 +1,3 @@
-
 @extends('layout.Layout')
  
 @section('content')
