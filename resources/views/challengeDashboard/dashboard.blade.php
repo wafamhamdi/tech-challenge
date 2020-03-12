@@ -1,13 +1,45 @@
 @extends('layout.Layout')
    
 @section('content')
- <div class="row">
+
+<head>
+<script>
+window.onload = function () {
+
+//Better to construct options first and then pass it as a parameter
+var options = {
+	title: {
+		text: "Challenges Chart"              
+	},
+	data: [              
+	{
+		// Change type to "doughnut", "line", "splineArea", etc.
+		type: "column",
+		dataPoints: [
+			{ label: "ch1",  y: 25 },
+			{ label: "ch2", y: 50  },
+			{ label: "ch3", y:75  },
+			{ label: "ch4",  y: 80  },
+			{ label: "ch5",  y: 30  }
+		]
+	}
+	]
+};
+
+$("#chartContainer").CanvasJSChart(options);
+}
+</script>
+</head>
+
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
+<div class="row">
   <div class="col-sm-6">
     <h4>Challenge List</h4>
   </div>
-  <div class="col-sm-6 text-right">
-    <a href="{{ route('challenges.create') }}" class="btn btn-success mb-2">Add</a> 
-  </div>
+ 
 </div>
  
  <div class="row">
@@ -15,24 +47,23 @@
         <table class="table table-bordered" id="laravel_crud">
          <thead>
             <tr>
-               <th>Id</th>
+              
                <th>Title</th>
                <th>Description</th>
-               <th>Start Date</th>
-               <th>End Date</th>
                <th>Status</th>
-              
-               <th colspan="2" class="text-center">Action</th>
+               <th>Participant List</th>
+               <th>Winner</th>
+               <th>Winner Code</th>
+               <th>Comments List</th>
+               
             </tr>
          </thead>
          <tbody>
             @foreach($challenges as $challenge)
             <tr>
-               <td>{{ $challenge->id }}</td>
+               
                <td>{{ $challenge->title }}</td>
                <td>{{ $challenge->description }}</td>
-               <td>{{ $challenge->startDate }}</td>
-               <td>{{ $challenge->endDate }}</td>
                @if( $current > $challenge->endDate )
                <td><font size="3" color="red">Closed</font>
                <i style='font-size:24px;color:red' class='far'>&#xf119;</i></td>
@@ -42,14 +73,16 @@
                <i style='font-size:24px;color:green'  class='fas'>&#xf581;</i></td>
                @endif
                <td class="text-center">
-                <a href="{{ route('challenges.edit',$challenge->id)}}" class="btn btn-primary">Edit</a></td>
+                <a href="" >Participant Listit</a></td>
+               <td></td>
+               <td></td>
+
                <td class="text-center">
-               <form action="{{ route('challenges.destroy', $challenge->id)}}" method="post">
-                {{ csrf_field() }}
-                @method('DELETE')
-                <button class="btn btn-danger" type="submit">Delete</button>
-              </form>
+             
+               <a href="" >Comments List</a></td>
+           
               </td>
+             
             </tr>
             @endforeach
  
@@ -64,4 +97,6 @@
         {!! $challenges->links() !!}
      </div> 
  </div>
+
+
  @endsection  

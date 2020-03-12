@@ -44,6 +44,8 @@ class ChallengeController extends Controller
             'title' => 'required',
             'status' => 'required',
             'description' => 'required',
+            'startDate'=> 'required',
+            'endDate'=> 'required'
         ]);
    
         Challenge::create($request->all());
@@ -90,9 +92,13 @@ class ChallengeController extends Controller
             'title' => 'required',
             'status' => 'required',
             'description' => 'required',
+            'startDate'=> 'required',
+            'endDate'=> 'required'
         ]);
          
-        $update = ['title' => $request->title, 'description' => $request->description];
+        $update = ['title' => $request->title, 'status' => $request->status,'description' => $request->description,
+        'startDate' => $request->startDate
+        ,'endDate' => $request->endDate];
         Challenge::where('id',$id)->update($update);
    
         return Redirect::to('challenges')

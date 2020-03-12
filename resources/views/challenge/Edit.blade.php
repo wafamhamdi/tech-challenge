@@ -1,4 +1,4 @@
-@extends('challenge.Layout')
+@extends('layout.Layout')
  
 @section('content')
  
@@ -33,6 +33,20 @@
               <span class="text-danger">{{ $errors->first('description') }}</span>
           </div>
       </div>
+      <div class="col-md-12">
+            <div class="form-group">
+                <strong>Start Date</strong>
+                <input type="date" id="startDate" name="startDate" />
+                <span class="text-danger">{{ $errors->first('startDate') }}</span>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <strong>End Date</strong>
+                <input type="date" id="endDate" name="endDate" />
+                <span class="text-danger">{{ $errors->first('endDate') }}</span>
+            </div>
+        </div>
       <div class="col-md-12">
           <div class="form-group">
               <strong>Status</strong>

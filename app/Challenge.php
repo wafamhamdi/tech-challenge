@@ -9,7 +9,9 @@ class Challenge extends Model
     protected $fillable = [
         'title',
         'status',
-        'description'
+        'description',
+        'startDate',
+        'endDate'
        ];
     
 

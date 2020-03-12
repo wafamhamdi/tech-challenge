@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\ChallengeCode;
 use Illuminate\Http\Request;
 
-class ChallengeCodeController extends Controller
+use App\Challenge;
+use App\Charts\ChallengeChart;
+use Redirect;
+
+class ChallengeDashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +17,11 @@ class ChallengeCodeController extends Controller
      */
     public function index()
     {
-   
-        return view('Challengecode.List',$data);
+        $data['challenges'] = Challenge::orderBy('id','Asc')->paginate(10);
+     
+        return view('challengeDashboard.dashboard',$data);
+
+
     }
 
     /**
@@ -25,7 +31,7 @@ class ChallengeCodeController extends Controller
      */
     public function create()
     {
-        return view('Challengecode.Create');
+        return view('challenge.Create');
     }
 
     /**
@@ -37,26 +43,26 @@ class ChallengeCodeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'participant_id' => 'required',
-            'challenge_id' => 'required',
-            'code' => 'required',
-            'status'=>'required',
-            'winner' => 'required'
+            'title' => 'required',
+            'status' => 'required',
+            'description' => 'required',
+            'startDate'=> 'required',
+            'endDate'=> 'required'
         ]);
    
         Challenge::create($request->all());
     
-        return Redirect::to('challenge_codes')
-       ->with('success','Greate! challenge code created successfully.');
+        return Redirect::to('challenges')
+       ->with('success','Greate! Challenge created successfully.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\ChallengeCode  $challengeCode
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(ChallengeCode $challengeCode)
+    public function show($id)
     {
         //
     }
@@ -64,33 +70,37 @@ class ChallengeCodeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ChallengeCode  $challengeCode
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(ChallengeCode $challengeCode)
+    public function edit($id)
     {
         $where = array('id' => $id);
-        $data['challengeCode_info'] = ChallengeCode::where($where)->first();
+        $data['challenge_info'] = Challenge::where($where)->first();
  
-        return view('challengeCode.Edit', $data);
+        return view('challenge.Edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ChallengeCode  $challengeCode
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ChallengeCode $challengeCode)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'title' => 'required',
             'status' => 'required',
             'description' => 'required',
+            'startDate'=> 'required',
+            'endDate'=> 'required'
         ]);
          
-        $update = ['title' => $request->title,  'description' => $request->description ];
+        $update = ['title' => $request->title, 'status' => $request->status,'description' => $request->description,
+        'startDate' => $request->startDate
+        ,'endDate' => $request->endDate];
         Challenge::where('id',$id)->update($update);
    
         return Redirect::to('challenges')
@@ -100,11 +110,13 @@ class ChallengeCodeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ChallengeCode  $challengeCode
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ChallengeCode $challengeCode)
+    public function destroy($id)
     {
-        //
+        Challenge::where('id',$id)->delete();
+   
+        return Redirect::to('challenges')->with('success','Challenge deleted successfully');
     }
 }

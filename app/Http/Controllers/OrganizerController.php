@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Organizer;
 use Illuminate\Http\Request;
 
+use Redirect;
+
 class OrganizerController extends Controller
 {
       /**
@@ -26,7 +28,7 @@ class OrganizerController extends Controller
      */
     public function create()
     {
-        return view('admin.Create');
+        return view('organizer.Create');
     }
 
     /**
@@ -69,7 +71,7 @@ class OrganizerController extends Controller
     public function edit($id)
     {
         $where = array('id' => $id);
-        $data['organizer_info'] = Admin::where($where)->first();
+        $data['organizer_info'] = Organizer::where($where)->first();
  
         return view('organizer.Edit', $data);
     }
@@ -90,10 +92,10 @@ class OrganizerController extends Controller
            
         ]);
          
-        $update = ['name' => $request->name, 'type' => $request->type];
-        Admin::where('id',$id)->update($update);
+        $update = ['name' => $request->name, 'email' => $request->email, 'password' => $request->password];
+        Organizer::where('id',$id)->update($update);
    
-        return Redirect::to('admins')
+        return Redirect::to('organizers')
        ->with('success','Great! Organizer updated successfully');
     }
 

@@ -90,7 +90,7 @@ class UserController extends Controller
             'type' => 'required'
         ]);
          
-        $update = ['name' => $request->name, 'type' => $request->type];
+        $update = ['name' => $request->name, 'email' => $request->email, 'password' => $request->password, 'type' => $request->type];
         User::where('id',$id)->update($update);
    
         return Redirect::to('users')

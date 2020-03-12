@@ -1,12 +1,12 @@
-@extends('user.Layout')
+@extends('layout.Layout')
    
 @section('content')
  <div class="row">
   <div class="col-sm-6">
-    <h4>User List</h4>
+    <h4>organizer List</h4>
   </div>
   <div class="col-sm-6 text-right">
-    <a href="{{ route('users.create') }}" class="btn btn-success mb-2">Add</a> 
+    <a href="{{ route('organizers.create') }}" class="btn btn-success mb-2">Add</a> 
   </div>
 </div>
  
@@ -19,25 +19,25 @@
                <th> Name</th>
                <th>Email</th>
                <th>Password</th>
-               <th>Type</th>
+            
             
                <th colspan="2" class="text-center">Action</th>
             </tr>
          </thead>
          <tbody>
-            @foreach($users as $user)
+            @foreach($organizers as $organizer)
             <tr>
-               <td>{{ $user->id }}</td>
-               <td>{{ $user->name }}</td>
-               <td>{{ $user->email }}</td>
-               <td>{{ $user->password }}</td>
-               <td>{{ $user->type }}</td>
+               <td>{{ $organizer->id }}</td>
+               <td>{{ $organizer->name }}</td>
+               <td>{{ $organizer->email }}</td>
+               <td>{{ $organizer->password }}</td>
+              
             
              
                <td class="text-center">
-                <a href="{{ route('users.edit',$user->id)}}" class="btn btn-primary">Edit</a></td>
+                <a href="{{ route('organizers.edit',$organizer->id)}}" class="btn btn-primary">Edit</a></td>
                <td class="text-center">
-               <form action="{{ route('users.destroy', $user->id)}}" method="post">
+               <form action="{{ route('organizers.destroy', $organizer->id)}}" method="post">
                 {{ csrf_field() }}
                 @method('DELETE')
                 <button class="btn btn-danger" type="submit">Delete</button>
@@ -46,15 +46,15 @@
             </tr>
             @endforeach
  
-            @if(count($users) < 1)
+            @if(count($organizers) < 1)
               <tr>
-               <td colspan="10" class="text-center">There are no user available yet!</td>
+               <td colspan="10" class="text-center">There are no organizer available yet!</td>
               </td>
             </tr>
             @endif
          </tbody>
         </table>
-        {!! $users->links() !!}
+        {!! $organizers->links() !!}
      </div> 
  </div>
  @endsection  

@@ -1,4 +1,4 @@
-@extends('user.Layout')
+@extends('layout.Layout')
  
 @section('content')
  
@@ -44,10 +44,11 @@
             <div class="form-group">
                 <strong>Type</strong>
                 <select class="form-control" col="4" name="type">
-    <option value="admin">Admin</option>
-    <option value="organizer">Organizer</option>
+  
     <option value="particpant">Particpant</option>
     <option value="guest">Guest</option>
+    <option value="admin">Admin</option>
+    <option value="organizer">Organizer</option>
 </select>
                
                 <span class="text-danger">{{ $errors->first('type') }}</span>

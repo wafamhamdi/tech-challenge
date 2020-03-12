@@ -19,6 +19,9 @@
               $table->string('title'); 
               $table->string('status'); 
               $table->text('description'); 
+              $table->date('startDate'); 
+              $table->date('endDate'); 
+             
               $table->timestamps(); 
           }); 
       } 
