@@ -8,7 +8,8 @@ use App\Challenge;
 use Redirect;
 
 class ChallengeCommentController extends Controller
-{
+{ 
+    public $idChallenge;
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +17,7 @@ class ChallengeCommentController extends Controller
      */
     public function index()
     {
-        $data['challenges'] = challengeComment::orderBy('id','desc')->paginate(10);
+        $data['challengeComment'] = challengeComment::orderBy('id','desc')->paginate(10);
    
         return view('comment.List',$data);
     }
@@ -48,9 +49,8 @@ class ChallengeCommentController extends Controller
     // ]);
 
     // challengeComment::create($request->all());
-
-    return Redirect::to('comments')
-   ->with('success','Greate! comment created successfully.');
+    return view('comment.List',$this->idChallenge);
+   
     }
 
     /**
@@ -99,6 +99,7 @@ class ChallengeCommentController extends Controller
     }
     public function getAllChallengecomment($idChallenge)
     {
+        $this->$idChallenge=$idChallenge;
     //  $where = ('challenge_id' => $idChallenge);
         $data['challengeComment'] = challengeComment::where('challenge_id',$idChallenge);
         $challenge = Challenge::find($idChallenge);

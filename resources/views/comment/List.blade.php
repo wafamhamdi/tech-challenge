@@ -20,7 +20,7 @@
         <h4 class="modal-title">
         <label>{{ $challenge->title }}</label>
         <br>
-       <label> Winner Name :{{Auth::user()->name }}</label>
+       <label>Participant Name:{{Auth::user()->name }}</label>
         
         </h4>
         <button type="button" class="close" data-dismiss="modal">
@@ -48,7 +48,7 @@
     </div>
 
     <div class="col-sm-9">
-      <h4><small>RECENT POSTS</small></h4>
+      <h4><small>Welcome to The challenge</small></h4>
       <hr>
       <h2>{{ $challenge->title }}</h2>
       <h5><span class="glyphicon glyphicon-time"></span> {{ $challenge->endDate }}
