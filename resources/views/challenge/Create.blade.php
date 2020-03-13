@@ -23,13 +23,13 @@
                 <span class="text-danger">{{ $errors->first('title') }}</span>
             </div>
         </div>
+     
         <div class="col-md-12">
-            <div class="form-group">
-                <strong>Description</strong>
-                <input type="text" name="description" class="form-control" placeholder="Enter Challenge Description">
-                <span class="text-danger">{{ $errors->first('description') }}</span>
-            </div>
-        </div>
+          <div class="form-group">
+              <strong>Description</strong>
+              <textarea class="form-control" col="4" name="description"  placeholder="Enter Challenge Description" ></textarea>
+              <span class="text-danger">{{ $errors->first('description') }}</span>
+          </div>
 
         <div class="col-md-12">
             <div class="form-group">

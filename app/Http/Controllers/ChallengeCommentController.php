@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use App\challengeComment;
 use Illuminate\Http\Request;
+use App\Challenge;
+use Redirect;
 
 class ChallengeCommentController extends Controller
 {
@@ -14,7 +16,7 @@ class ChallengeCommentController extends Controller
      */
     public function index()
     {
-        $data['challenges'] = challengeComment::orderBy('createDate','desc')->paginate(10);
+        $data['challenges'] = challengeComment::orderBy('id','desc')->paginate(10);
    
         return view('comment.List',$data);
     }
@@ -26,7 +28,7 @@ class ChallengeCommentController extends Controller
      */
     public function create()
     {
-        //
+        return view('comment.List');
     }
 
     /**
@@ -37,7 +39,18 @@ class ChallengeCommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    //    error_log("helooooooooooooooooooo");
+   
+    //     $request->validate([
+    //     'content' => 'required',
+    //     'participant_id' => 'required',
+    //     'challenge_id'=> 'required'     
+    // ]);
+
+    // challengeComment::create($request->all());
+
+    return Redirect::to('comments')
+   ->with('success','Greate! comment created successfully.');
     }
 
     /**
@@ -84,4 +97,13 @@ class ChallengeCommentController extends Controller
     {
         //
     }
+    public function getAllChallengecomment($idChallenge)
+    {
+    //  $where = ('challenge_id' => $idChallenge);
+        $data['challengeComment'] = challengeComment::where('challenge_id',$idChallenge);
+        $challenge = Challenge::find($idChallenge);
+        return view('comment.List')->With('challengeComment',$data)->With('challenge', $challenge);
+    }
+    
 }
+ 

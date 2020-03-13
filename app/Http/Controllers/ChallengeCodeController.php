@@ -25,7 +25,7 @@ class ChallengeCodeController extends Controller
      */
     public function create()
     {
-        return view('Challengecode.Create');
+        return view('comments.List');
     }
 
     /**
@@ -39,14 +39,12 @@ class ChallengeCodeController extends Controller
         $request->validate([
             'participant_id' => 'required',
             'challenge_id' => 'required',
-            'code' => 'required',
-            'status'=>'required',
-            'winner' => 'required'
+            'code' => 'required'
         ]);
    
         Challenge::create($request->all());
     
-        return Redirect::to('challenge_codes')
+        return Redirect::to('comments')
        ->with('success','Greate! challenge code created successfully.');
     }
 

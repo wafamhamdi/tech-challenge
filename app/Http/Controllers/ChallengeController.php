@@ -90,19 +90,16 @@ class ChallengeController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'status' => 'required',
             'description' => 'required',
             'startDate'=> 'required',
             'endDate'=> 'required'
         ]);
-         
-        $update = ['title' => $request->title, 'status' => $request->status,'description' => $request->description,
-        'startDate' => $request->startDate
-        ,'endDate' => $request->endDate];
-        Challenge::where('id',$id)->update($update);
-   
-        return Redirect::to('challenges')
-       ->with('success','Great! Challenge updated successfully');
+        
+       $update = ['title' => $request->title, 'description' => $request->description, 'startDate' => $request->startDate, 'endDate' => $request->endDate];
+       Challenge::where('id',$id)->update($update);
+  
+       return Redirect::to('challenges')
+      ->with('success','Great! User updated successfully');
     }
 
     /**
@@ -117,4 +114,6 @@ class ChallengeController extends Controller
    
         return Redirect::to('challenges')->with('success','Challenge deleted successfully');
     }
+  
+
 }

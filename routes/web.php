@@ -19,7 +19,9 @@ Route::resource('users', 'UserController');
 Route::resource('organizers', 'OrganizerController'); 
 
 Route::resource('dashboard', 'ChallengeDashboardController'); 
-Route::resource('comment', 'ChallengeCodeController'); 
+Route::resource('comments', 'ChallengeCommentController'); 
+Route::get('commentByChallenge/{idChallenge}', 'ChallengeCommentController@getAllChallengecomment')->name('commments'); 
+Route::resource('codes', 'ChallengeCodeController'); 
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');

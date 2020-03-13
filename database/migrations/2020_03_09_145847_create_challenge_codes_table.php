@@ -16,10 +16,7 @@ class CreateChallengeCodesTable extends Migration
         Schema::create('challenge_codes', function (Blueprint $table) {
             $table->integer('id')->autoIncrement();
             $table->integer('participant_id');
-            $table->foreign('participant_id')->unsigned()->references('id')->on('users');
-
             $table->integer('challenge_id');
-            $table->foreign('challenge_id')->unsigned()->references('id')->on('challenges');
             $table->boolean('winner');
             $table->text('code');
 

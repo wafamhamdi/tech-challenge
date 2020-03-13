@@ -26,7 +26,7 @@
          </thead>
          <tbody>
             @foreach($users as $user)
-            @if( $user->type==$participantType ||$user->type==$guestype )
+            
             <tr class="text-center">
                <td>{{ $user->id }}</td>
                <td>{{ $user->name }}</td>
@@ -45,7 +45,7 @@
               </form>
               </td>
             </tr>
-            @endif
+           
             @endforeach
  
             @if(count($users) < 1)

@@ -10,17 +10,15 @@
     <a href="{{ route('challenges.index') }}" class="btn btn-danger mb-2">Go Back</a> 
   </div>    
 </div>
-<hr />
-  
+<hr /> 
 <form action="{{ route('challenges.update', $challenge_info->id) }}" method="POST" name="update_challenge">
   {{ csrf_field() }}
   @method('PATCH')
-    
   <div class="row">
       <div class="col-md-12">
           <div class="form-group">
               <strong>Title</strong>
-              <input type="text" name="title" class="form-control" placeholder="Enter Title" value="{{ $challenge_info->title }}">
+              <input type="text" name="title" class="form-control" placeholder="Enter Title" value="{{ $challenge_info->title }}" >
               <span class="text-danger">{{ $errors->first('title') }}</span>
           </div>
       </div>
@@ -36,14 +34,14 @@
       <div class="col-md-12">
             <div class="form-group">
                 <strong>Start Date</strong>
-                <input type="date" id="startDate"  value ="{{ $challenge_info->startDate }}" name="startDate" />
+                <input type="date" id="startDate"   name="startDate" value="{{ $challenge_info->startDate }}" />
                 <span class="text-danger">{{ $errors->first('startDate') }}</span>
             </div>
         </div>
         <div class="col-md-12">
             <div class="form-group">
                 <strong>End Date</strong>
-                <input type="date" id="endDate" name="endDate" value ="{{ $challenge_info->endDate }}"/>
+                <input type="date" id="endDate" name="endDate" value="{{ $challenge_info->endDate }}"  />
                 <span class="text-danger">{{ $errors->first('endDate') }}</span>
             </div>
         </div>

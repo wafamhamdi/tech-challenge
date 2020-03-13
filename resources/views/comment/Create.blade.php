@@ -3,7 +3,7 @@
 @section('content')
 <div class="row">
     <div class="col-sm-6">
-        <h4>Add Challenge</h4>
+        <h4>Try it !! Maybe you are the Winner</h4>
     </div>
     <div class="col-sm-6 text-right">
         <a href="{{ route('challenges.index') }}" class="btn btn-danger mb-2">Go Back</a> 

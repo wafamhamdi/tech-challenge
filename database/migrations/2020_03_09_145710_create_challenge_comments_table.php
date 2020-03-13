@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
+use Carbon\Carbon;
 class CreateChallengeCommentsTable extends Migration
 {
     /**
@@ -17,9 +17,10 @@ class CreateChallengeCommentsTable extends Migration
           
             $table->integer('id')->autoIncrement();
             $table->integer('challenge_id');
-            $table->foreign('challenge_id')->unsigned()->references('id')->on('challenges');
             $table->integer('participant_id');
-            $table->foreign('participant_id')->unsigned()->references('id')->on('users');
+            $table->string('content');
+            $table->date('postedDate')->default( Carbon::now()->toDateTimeString());
+            
             $table->timestamps();
         });
     }

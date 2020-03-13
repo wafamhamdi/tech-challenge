@@ -1,6 +1,7 @@
 @extends('layout.Layout')
    
 @section('content')
+@if(Auth::user()->type ==$adminType ||  Auth::user()->type==$organizerType)
  <div class="row">
   <div class="col-sm-6">
     <h4>Challenge List</h4>
@@ -64,4 +65,61 @@
         {!! $challenges->links() !!}
      </div> 
  </div>
+ @else
+
+ <div class="row">
+  <div class="col-sm-6">
+    <h4>Challenges that you can participate on it </h4>
+  </div>
+  <div class="col-sm-6 text-right">
+    <a href="{{ route('challenges.create') }}" class="btn btn-success mb-2">Add</a> 
+  </div>
+</div>
+ 
+ <div class="row">
+      <div class="col-12">          
+        <table class="table table-bordered" id="laravel_crud">
+         <thead>
+            <tr>
+               <th class="text-center">Title</th>
+               <th class="text-center">Description</th>
+               <th class="text-center">Start Date</th>
+               <th class="text-center">End Date</th>
+               <th class="text-center">Status</th>
+               <th colspan="2" class="text-center">Participate</th>
+            </tr>
+         </thead>
+         <tbody>
+            @foreach($challenges as $challenge)
+            <tr class="text-center" >
+            @if( $current< $challenge->endDate )
+               <td>{{ $challenge->title }}</td>
+               <td>{{ $challenge->description }}</td>
+               <td>{{ $challenge->startDate }}</td>
+               <td>{{ $challenge->endDate }}</td>
+               <td>
+               <font size="3"  color="green">Ongoing</font>
+               <i style='font-size:24px;color:green'  class='fas'>&#xf581;</i></td>
+            
+               <td class="text-center">
+            <a href="{{route('commments',$challenge->id)}}">Clik here to participate</a>
+                @endif
+                 </tr>
+            @endforeach
+ 
+            @if(count($challenges) < 1)
+              <tr>
+               <td colspan="10" class="text-center">There are no challenge available yet!</td>
+              </td>
+            </tr>
+            @endif
+         </tbody>
+        </table>
+        {!! $challenges->links() !!}
+     </div> 
+ </div>
+
+
+ @endif
+ 
  @endsection  
